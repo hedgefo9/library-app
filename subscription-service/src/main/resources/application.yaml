@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: subscription-service
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    consumer:
+      group-id: ${spring.application.name}-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+      value-deserializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer
+      properties:
+          schema.registry.url: http://localhost:6081
+
+  data:
+    redis:
+      host: localhost
+      timeout: 5000ms
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 5
+          min-idle: 1
+          max-wait: 500ms
+      database: 0
+      port: 6379
+
+
+server:
+  port: 8082

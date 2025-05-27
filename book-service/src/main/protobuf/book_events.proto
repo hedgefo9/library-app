@@ -1,0 +1,28 @@
+syntax = "proto3";
+package com.hedgefo9.libraryapp.events;
+
+message BookEvent {
+  int64      book_id = 1;
+  string     isbn = 2;
+  int32      publication_year = 3;
+  string     title = 4;
+  string     genre = 5;
+  string     description = 6;
+  repeated Author authors = 7;
+  int64      event_time = 8; // unix millis
+}
+
+message BookCreatedEvent {
+  BookEvent base = 1;
+}
+
+message BookDeletedEvent {
+  int64 book_id = 1;
+}
+
+// Автор
+message Author {
+  int64 id = 1;
+  string name = 2;
+  string bio = 3;
+}
