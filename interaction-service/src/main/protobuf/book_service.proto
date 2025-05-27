@@ -1,0 +1,46 @@
+syntax = "proto3";
+package com.hedgefo9.libraryapp.events;
+
+message Book {
+	int64 id = 1;
+	string isbn = 2;
+	int32 publication_year = 3;
+	string genre = 4;
+	string title = 5;
+	string description = 6;
+	optional double average_rating = 7;
+	optional int32 review_count = 8;
+	optional string thumbnail_url = 9;
+	optional string content_file_s3_key = 10;
+	repeated Author authors = 11;
+}
+
+message BookCreatedEvent {
+	Book base = 1;
+}
+
+message BookUpdatedEvent {
+	Book base = 1;
+}
+
+message BookDeletedEvent {
+	int64 book_id = 1;
+}
+
+message Author {
+	int64 id = 1;
+	string name = 2;
+	string bio = 3;
+}
+
+message AuthorCreatedEvent {
+	Author base = 1;
+}
+
+message AuthorUpdatedEvent {
+	Author base = 1;
+}
+
+message AuthorDeletedEvent {
+	int64 author_id = 1;
+}
